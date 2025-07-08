@@ -1,3 +1,15 @@
+const toggleTheme = document.getElementById("toggle-theme");
+
+toggleTheme.addEventListener("click", () => {
+	document.body.classList.toggle("dark");
+
+
+	toggleTheme.textContent = document.body.classList.contains("dark")
+		? "☀️ Light Mode"
+		: "🌙 Dark Mode";
+});
+
+
 const regForm = document.querySelector("#registration-form");
 const age = regForm.querySelector("#age");
 const phone = regForm.querySelector("#phone");
