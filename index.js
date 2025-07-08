@@ -1,14 +1,18 @@
+
 const toggleTheme = document.getElementById("toggle-theme");
 
 toggleTheme.addEventListener("click", () => {
 	document.body.classList.toggle("dark");
-
-
-	toggleTheme.textContent = document.body.classList.contains("dark")
-		? "☀️ Light Mode"
-		: "🌙 Dark Mode";
+	const isDark = document.body.classList.contains("dark");
+	toggleTheme.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+	localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
+
+if (localStorage.getItem("theme") === "dark") {
+	document.body.classList.add("dark");
+	toggleTheme.textContent = "☀️ Light Mode";
+}
 
 const regForm = document.querySelector("#registration-form");
 const age = regForm.querySelector("#age");
@@ -16,6 +20,7 @@ const phone = regForm.querySelector("#phone");
 const personalNumber = regForm.querySelector("#personal-number");
 const email = regForm.querySelector("#email");
 const password = regForm.querySelector("#password");
+const passwordCounter = document.querySelector("#password-counter");
 
 const successModal = document.querySelector("#reg-modal");
 const closeSuccessModal = successModal.querySelector(".close");
@@ -31,23 +36,26 @@ successDialogClose.addEventListener("click", () => {
 });
 
 function setError(element, message) {
-	element.closest(".form-group").classList.remove("success");
-	element.closest(".form-group").classList.add("error");
-	element.closest(".form-group").querySelector(".message").textContent = message;
+	const group = element.closest(".form-group");
+	group.classList.remove("success");
+	group.classList.add("error");
+	group.querySelector(".message").textContent = message;
 }
 
 function setSuccess(element, message) {
-	element.closest(".form-group").classList.remove("error");
-	element.closest(".form-group").classList.add("success");
-	element.closest(".form-group").querySelector(".message").textContent = message;
+	const group = element.closest(".form-group");
+	group.classList.remove("error");
+	group.classList.add("success");
+	group.querySelector(".message").textContent = message;
 }
 
 function isAgeValid() {
-	if (age.validity.valueMissing) {
+	const value = parseInt(age.value.trim());
+	if (isNaN(value)) {
 		setError(age, "Age is required");
 		return false;
-	} else if (!age.validity.valid) {
-		setError(age, "Age should be between 1 and 20");
+	} else if (value < 1 || value > 100) {
+		setError(age, "Age should be between 1 and 100");
 		return false;
 	} else {
 		setSuccess(age, "Valid age");
@@ -56,13 +64,12 @@ function isAgeValid() {
 }
 
 function isPhoneValid() {
-	const phoneValue = phone.value.trim();
+	const value = phone.value.trim();
 	const regex = /^\d{9}$/;
-
-	if (phoneValue.length === 0) {
+	if (value.length === 0) {
 		setError(phone, "Phone number is required");
 		return false;
-	} else if (!regex.test(phoneValue)) {
+	} else if (!regex.test(value)) {
 		setError(phone, "Phone number must be 9 digits");
 		return false;
 	} else {
@@ -74,7 +81,6 @@ function isPhoneValid() {
 function isPersonalNumberValid() {
 	const value = personalNumber.value.trim();
 	const regex = /^\d{11}$/;
-
 	if (value.length === 0) {
 		setError(personalNumber, "Personal number is required");
 		return false;
@@ -89,7 +95,6 @@ function isPersonalNumberValid() {
 
 function isEmailValid() {
 	const value = email.value.trim();
-
 	if (value.length === 0) {
 		setError(email, "Email is required");
 		return false;
@@ -104,7 +109,6 @@ function isEmailValid() {
 
 function isPasswordValid() {
 	const value = password.value.trim();
-
 	if (value.length === 0) {
 		setError(password, "Password is required");
 		return false;
@@ -117,6 +121,19 @@ function isPasswordValid() {
 	}
 }
 
+password.addEventListener("input", () => {
+	passwordCounter.textContent = `${password.value.length} / 20`;
+	isPasswordValid();
+});
+
+=
+age.addEventListener("input", isAgeValid);
+phone.addEventListener("input", isPhoneValid);
+personalNumber.addEventListener("input", isPersonalNumberValid);
+email.addEventListener("input", isEmailValid);
+password.addEventListener("input", isPasswordValid);
+
+
 regForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
@@ -128,19 +145,18 @@ regForm.addEventListener("submit", (e) => {
 
 	if (validAge && validPhone && validPersonalNumber && validEmail && validPassword) {
 		successDialog.showModal();
+
+		// Auto-close after 3 seconds
+		setTimeout(() => {
+			successDialog.close();
+		}, 3000);
+
+		// Reset form
+		regForm.reset();
+		passwordCounter.textContent = "0 / 20";
+		document.querySelectorAll(".form-group").forEach(group => {
+			group.classList.remove("success");
+			group.querySelector(".message").textContent = "";
+		});
 	}
 });
-
-const passwordCounter = document.querySelector("#password-counter");
-
-password.addEventListener("input", () => {
-	passwordCounter.textContent = `${password.value.length} / 20`;
-	isPasswordValid(); // 
-});
-
-
-age.addEventListener("input", isAgeValid);
-phone.addEventListener("input", isPhoneValid);
-personalNumber.addEventListener("input", isPersonalNumberValid);
-email.addEventListener("input", isEmailValid);
-password.addEventListener("input", isPasswordValid);
