@@ -119,6 +119,14 @@ regForm.addEventListener("submit", (e) => {
 	}
 });
 
+const passwordCounter = document.querySelector("#password-counter");
+
+password.addEventListener("input", () => {
+	passwordCounter.textContent = `${password.value.length} / 20`;
+	isPasswordValid(); // 
+});
+
+
 age.addEventListener("input", isAgeValid);
 phone.addEventListener("input", isPhoneValid);
 personalNumber.addEventListener("input", isPersonalNumberValid);
