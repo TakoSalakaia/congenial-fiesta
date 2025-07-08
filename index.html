@@ -1,71 +1,65 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Registration Form</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<button id="toggle-theme" class="theme-toggle">🌙 Dark Mode</button>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Registration Form</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-		<section>
-			<div class="container">
-				<h1>homework</h1>
-				<form action="#" id="registration-form" novalidate>
-					<div class="form-group">
-						<label for="age">Age</label>
-						<input type="number" required min="1" max="20" id="age" name="age" />
-						<span class="message"></span>
-					</div>
+	<button id="toggle-theme" class="theme-toggle">🌙 Dark Mode</button>
 
-					<div class="form-group">
-						<label for="phone">Phone</label>
-						<input type="text" id="phone" name="phone" />
-						<span class="message"></span>
-					</div>
+	<section>
+		<div class="container">
+			<h1>Homework</h1>
+			<form action="#" id="registration-form" novalidate>
+				
+				<div class="form-group">
+					<label for="age">Age</label>
+					<input type="number" required min="1" max="100" id="age" name="age" />
+					<span class="message"></span>
+				</div>
 
-					<div class="form-group">
-						<label for="personal-number">Personal Number</label>
-						<input type="text" id="personal-number" name="personal-number" />
-						<span class="message"></span>
-					</div>
+				<div class="form-group">
+					<label for="phone">Phone</label>
+					<input type="text" id="phone" name="phone" />
+					<span class="message"></span>
+				</div>
 
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" id="email" name="email" />
-						<span class="message"></span>
-					</div>
+				<div class="form-group">
+					<label for="personal-number">Personal Number</label>
+					<input type="text" id="personal-number" name="personal-number" />
+					<span class="message"></span>
+				</div>
 
-					<div class="form-group">
-	                                <label for="password">Password</label>
-	                                <input type="password" id="password" name="password" maxlength="20" />
-	                                <div class="char-count" id="password-counter">0 / 20</div>
-	                                <span class="message"></span>
-                        </div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" />
+					<span class="message"></span>
+				</div>
 
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" maxlength="20" />
+					<div class="char-count" id="password-counter">0 / 20</div>
+					<span class="message"></span>
+				</div>
 
-					<button type="submit">Submit</button>
-				</form>
-			</div>
-		</section>
-
-		<div class="modal" id="reg-modal">
-			<div class="modal-content">
-				<h3>modal title</h3>
-				<button class="close">close</button>
-			</div>
+				<button type="submit">Submit</button>
+			</form>
 		</div>
+	</section>
 
-		<dialog id="success-dialog">
-			<div class="modal-content">
-				<h3>Registration Successful!</h3>
-				<button class="close">Close</button>
-			</div>
-		</dialog>
+	
+	<dialog id="success-dialog">
+		<div class="modal-content">
+			<h3>Registration Successful!</h3>
+			<button class="close">Close</button>
+		</div>
+	</dialog>
 
-
-		<script src="index.js"></script>
-	</body>
+	
+	<script src="index.js"></script>
+</body>
 </html>
