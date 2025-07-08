@@ -14,6 +14,44 @@ body {
 	padding: 20px;
 }
 
+.theme-toggle {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background-color: #0d47a1;
+	color: white;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+	background-color: #1565c0;
+}
+
+body.dark {
+	background: linear-gradient(135deg, #212121, #424242);
+	color: #eee;
+}
+
+body.dark .container {
+	background-color: #333;
+}
+
+body.dark input {
+	background-color: #444;
+	color: #fff;
+	border-color: #666;
+}
+
+body.dark .char-count {
+	color: #bbb;
+}
+
+
 
 .container {
 	width: 100%;
