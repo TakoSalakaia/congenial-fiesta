@@ -1,4 +1,3 @@
-
 const toggleTheme = document.getElementById("toggle-theme");
 
 toggleTheme.addEventListener("click", () => {
@@ -21,19 +20,12 @@ const email = regForm.querySelector("#email");
 const password = regForm.querySelector("#password");
 const passwordCounter = document.querySelector("#password-counter");
 
-const successModal = document.querySelector("#reg-modal");
-const closeSuccessModal = successModal.querySelector(".close");
 const successDialog = document.querySelector("#success-dialog");
 const successDialogClose = successDialog.querySelector(".close");
-
-closeSuccessModal.addEventListener("click", () => {
-	successModal.classList.remove("open");
-});
 
 successDialogClose.addEventListener("click", () => {
 	successDialog.close();
 });
-
 
 function setError(element, message) {
 	const group = element.closest(".form-group");
@@ -130,7 +122,7 @@ age.addEventListener("input", isAgeValid);
 phone.addEventListener("input", isPhoneValid);
 personalNumber.addEventListener("input", isPersonalNumberValid);
 email.addEventListener("input", isEmailValid);
-
+password.addEventListener("input", isPasswordValid);
 
 regForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -144,12 +136,10 @@ regForm.addEventListener("submit", (e) => {
 	if (validAge && validPhone && validPersonalNumber && validEmail && validPassword) {
 		successDialog.showModal();
 
-		
 		setTimeout(() => {
 			successDialog.close();
 		}, 3000);
 
-		
 		regForm.reset();
 		passwordCounter.textContent = "0 / 20";
 		document.querySelectorAll(".form-group").forEach(group => {
