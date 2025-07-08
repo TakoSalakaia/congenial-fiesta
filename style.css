@@ -174,3 +174,19 @@ dialog .close {
 	cursor: pointer;
 	font-weight: bold;
 }
+
+@keyframes popupFadeIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -60%) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+dialog[open] {
+	animation: popupFadeIn 0.3s ease-out;
+}
+
