@@ -8,7 +8,6 @@ toggleTheme.addEventListener("click", () => {
 	localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
-
 if (localStorage.getItem("theme") === "dark") {
 	document.body.classList.add("dark");
 	toggleTheme.textContent = "☀️ Light Mode";
@@ -34,6 +33,7 @@ closeSuccessModal.addEventListener("click", () => {
 successDialogClose.addEventListener("click", () => {
 	successDialog.close();
 });
+
 
 function setError(element, message) {
 	const group = element.closest(".form-group");
@@ -126,12 +126,10 @@ password.addEventListener("input", () => {
 	isPasswordValid();
 });
 
-=
 age.addEventListener("input", isAgeValid);
 phone.addEventListener("input", isPhoneValid);
 personalNumber.addEventListener("input", isPersonalNumberValid);
 email.addEventListener("input", isEmailValid);
-password.addEventListener("input", isPasswordValid);
 
 
 regForm.addEventListener("submit", (e) => {
@@ -146,12 +144,12 @@ regForm.addEventListener("submit", (e) => {
 	if (validAge && validPhone && validPersonalNumber && validEmail && validPassword) {
 		successDialog.showModal();
 
-		// Auto-close after 3 seconds
+		
 		setTimeout(() => {
 			successDialog.close();
 		}, 3000);
 
-		// Reset form
+		
 		regForm.reset();
 		passwordCounter.textContent = "0 / 20";
 		document.querySelectorAll(".form-group").forEach(group => {
